@@ -1,0 +1,28 @@
+'/')
+  ) {
+    const op = tokens[pos.index].value;
+    pos.index++;
+    const right = parseFactor(tokens, pos);
+    if (op === '*') left *= right;
+    else {
+      if (right === 0) throw new Error('Division by zero');
+      left /= right;
+    }
+  }
+
+  return left;
+}
+
+function parseFactor(tokens: Token[], pos: { index: number }): number {
+  const token = tokens[pos.index];
+
+  if (!token) {
+    throw new Error('Unexpected end of expression');
+  }
+
+  if (token.type === 'number') {
+    pos.index++;
+    return token.value;
+  }
+
+  if (token.type
