@@ -1,0 +1,25 @@
+'paren' && tokens[tokens.length - 1].value === '(')))) {
+      let numStr = '';
+      if (ch === '-') {
+        numStr += '-';
+        i++;
+      }
+      while (i < expr.length && /[0-9.]/.test(expr[i])) {
+        numStr += expr[i];
+        i++;
+      }
+      const value = parseFloat(numStr);
+      if (isNaN(value)) {
+        throw new Error(`Invalid number: ${numStr}`);
+      }
+      tokens.push({ type: 'number', value });
+      continue;
+    }
+
+    if ('+-*/'.includes(ch)) {
+      tokens.push({ type: 'operator', value: ch });
+      i++;
+      continue;
+    }
+
+    if (ch
